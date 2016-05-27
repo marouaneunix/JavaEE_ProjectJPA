@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
 @Entity
 @NamedQueries( {
         @NamedQuery( name = "Programme.findAll", query = "SELECT prg FROM Programme prg" ),
+        @NamedQuery( name = "Programme.findSessionAll", query = "SELECT s FROM Programme p JOIN p.sessionList s where p.dateSession >= :ThisDay" ),
 
 })
 @Table( name = "PROGRAMME" )
@@ -77,6 +78,39 @@ public class Programme implements Serializable {
 
     public Programme() {
         super();
+    }
+
+    @Override
+    public String toString() {
+        return String.format( "%1$tY-%1$tm-%1$td", getDateSession() );
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ( ( dateSession == null ) ? 0 : dateSession.hashCode() );
+        result = prime * result + programmeId;
+        return result;
+    }
+
+    @Override
+    public boolean equals( Object obj ) {
+        if ( this == obj )
+            return true;
+        if ( obj == null )
+            return false;
+        if ( getClass() != obj.getClass() )
+            return false;
+        Programme other = (Programme) obj;
+        if ( dateSession == null ) {
+            if ( other.dateSession != null )
+                return false;
+        } else if ( !dateSession.equals( other.dateSession ) )
+            return false;
+        if ( programmeId != other.programmeId )
+            return false;
+        return true;
     }
 
 }

@@ -23,6 +23,7 @@ import com.conference.jpa.service.EncryptPass;
 @NamedQueries( {
         @NamedQuery( name = "Personne.findAll", query = "SELECT p FROM Personne p" ),
         @NamedQuery( name = "Personne.findByCin", query = "SELECT p FROM Personne p WHERE p.cin = :cin" ),
+        @NamedQuery( name = "Personne.findAllChair", query = "SELECT p FROM Personne p WHERE TYPE(p) IN :classe" )
 })
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE )
 @DiscriminatorColumn( name = "type", discriminatorType = DiscriminatorType.STRING )

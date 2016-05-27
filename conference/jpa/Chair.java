@@ -35,4 +35,9 @@ public class Chair extends Personne implements Serializable {
         super();
     }
 
+    @Override
+    public String toString() {
+        return String.format( "%s", getCin() );
+    }
+
 }
